@@ -1,0 +1,122 @@
+{
+  "run_id": "run_20260215_224536",
+  "task": "classification",
+  "task_input": "classification",
+  "task_effective": "classification",
+  "task_note": null,
+  "split_warning": null,
+  "target_col": "gender_group",
+  "x_cols": [
+    "masterCategory",
+    "subCategory",
+    "articleType",
+    "baseColour",
+    "season",
+    "year",
+    "usage"
+  ],
+  "id_col": "id",
+  "text_cols": [],
+  "feature_types": {
+    "num": [
+      "year"
+    ],
+    "cat": [
+      "masterCategory",
+      "subCategory",
+      "articleType",
+      "baseColour",
+      "season",
+      "usage"
+    ],
+    "text": []
+  },
+  "selected_models": [
+    "random_forest",
+    "xgboost",
+    "logreg"
+  ],
+  "split": {
+    "train_rows": 652,
+    "val_rows": 164,
+    "test_rows": 205,
+    "test_size": 0.2,
+    "val_size_of_remaining": 0.2
+  },
+  "cv_folds_requested": 3,
+  "cv_folds_used": 3,
+  "cv_warning": null,
+  "n_jobs": -1,
+  "scoring": "f1_macro",
+  "comparison": [
+    {
+      "model": "random_forest",
+      "cv_best_score": 0.7078076625024062,
+      "val_metrics": {
+        "accuracy": 0.7560975609756098,
+        "f1_macro": 0.7422599402797423,
+        "roc_auc": 0.825561037720834
+      },
+      "val_primary_metric": 0.7422599402797423,
+      "best_params": {
+        "model__max_depth": null,
+        "model__min_samples_split": 2,
+        "model__n_estimators": 200
+      }
+    },
+    {
+      "model": "xgboost",
+      "cv_best_score": 0.7069013576888447,
+      "val_metrics": {
+        "accuracy": 0.7804878048780488,
+        "f1_macro": 0.7634615384615384,
+        "roc_auc": 0.8464905300015916
+      },
+      "val_primary_metric": 0.7634615384615384,
+      "best_params": {
+        "model__learning_rate": 0.1,
+        "model__max_depth": 6,
+        "model__n_estimators": 200
+      }
+    },
+    {
+      "model": "logreg",
+      "cv_best_score": 0.3866422641309249,
+      "val_metrics": {
+        "accuracy": 0.6280487804878049,
+        "f1_macro": 0.3857677902621723,
+        "roc_auc": 0.7129555944612446
+      },
+      "val_primary_metric": 0.3857677902621723,
+      "best_params": {
+        "model__C": 0.5
+      }
+    }
+  ],
+  "best_model": "xgboost",
+  "best_val_primary_metric": 0.7634615384615384,
+  "best_test_metrics": {
+    "accuracy": 0.7268292682926829,
+    "f1_macro": 0.7056410256410257,
+    "roc_auc": 0.8102305181558548
+  },
+  "best_test_primary_metric": 0.7056410256410257,
+  "justification": "Choix du meilleur modèle: comparaison sur le **jeu validation** (même X, même preprocessing). On retient celui qui maximise `f1_macro` sur validation. Ensuite, on ré-entraine ce modèle sur (train+val) et on reporte les métriques finales sur test.",
+  "best_params": {
+    "model__learning_rate": 0.1,
+    "model__max_depth": 6,
+    "model__n_estimators": 200
+  },
+  "artifacts": {
+    "run_dir": "runs/run_20260215_224536",
+    "run_reports_dir": "runs/run_20260215_224536/reports",
+    "run_plots_dir": "runs/run_20260215_224536/reports/plots",
+    "model_path": "models/best_model.pkl",
+    "meta_path": "reports/train_meta.json",
+    "splits_dir": "data/processed/splits"
+  },
+  "label_mapping": {
+    "0": "MEN",
+    "1": "WOMEN"
+  }
+}

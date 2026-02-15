@@ -1,0 +1,29 @@
+data:
+  raw_csv: data/raw/styles.csv
+  sep: ";"
+
+split:
+  test_size: 0.20
+  val_size: 0.10
+  random_state: 42
+
+tfidf:
+  stop_words: null
+  max_features: [6000]
+
+cv: 2
+scoring: f1_macro
+
+models:
+  logreg_C: [1.0]
+  rf_n_estimators: [80]
+  rf_max_depth: [20]
+  rf_max_features: ["sqrt"]
+  xgb_n_estimators: [120]
+  xgb_max_depth: [5]
+  xgb_learning_rate: [0.1]
+  xgb_subsample: [0.8]
+  xgb_colsample_bytree: [0.8]
+
+reco:
+  index_path: models/reco_item_index.pkl

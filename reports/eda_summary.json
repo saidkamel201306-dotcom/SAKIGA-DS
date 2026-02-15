@@ -1,0 +1,80 @@
+{
+  "config_used": {
+    "raw_csv": "data/raw/styles.csv",
+    "sep": ";",
+    "target_col": "gender_group",
+    "feature_cols": [
+      "masterCategory",
+      "subCategory",
+      "articleType",
+      "baseColour",
+      "season",
+      "year",
+      "usage"
+    ],
+    "task": "classification",
+    "id_col": "id",
+    "text_col": "productDisplayName",
+    "drop_cols": []
+  },
+  "raw_csv": "data/raw/styles.csv",
+  "sep": ";",
+  "saved_dataset": "data/processed/dataset.csv",
+  "shape": {
+    "rows": 1021,
+    "cols": 9
+  },
+  "target_col": "gender_group",
+  "id_col": "id",
+  "text_col": "productDisplayName",
+  "x_cols": [
+    "masterCategory",
+    "subCategory",
+    "articleType",
+    "baseColour",
+    "season",
+    "year",
+    "usage"
+  ],
+  "drop_cols": [],
+  "task": "classification",
+  "data_cleaning": {
+    "dropped_duplicates": 0,
+    "dropped_missing_y": 0,
+    "cast": {
+      "converted_to_numeric": []
+    },
+    "imputation": {
+      "numeric_median": [
+        "year"
+      ],
+      "categorical_mode": [
+        "masterCategory",
+        "subCategory",
+        "articleType",
+        "baseColour",
+        "season",
+        "usage"
+      ],
+      "text_empty": []
+    },
+    "outliers_clipped_cols": [],
+    "outlier_rules": {
+      "method": "iqr",
+      "factor": 1.5,
+      "min_n": 20,
+      "max_ratio_to_clip": 0.25
+    }
+  },
+  "target_info": {
+    "type": "classification",
+    "classes": {
+      "WOMEN": 643,
+      "MEN": 378
+    }
+  },
+  "notes": [
+    "Pré-traitement fait ici: sélection X/Y, NA, conversions, imputation, outliers (clipping).",
+    "Encoding/Scaling se fait proprement dans le Pipeline du train.py (OneHot/Scaler/Imputer) pour éviter la fuite de données."
+  ]
+}

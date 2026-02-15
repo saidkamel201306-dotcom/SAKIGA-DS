@@ -1,0 +1,16 @@
+{
+  "run_id": "run_20260215_170156",
+  "created_at": "2026-02-15T17:01:56",
+  "task": "regression",
+  "best_model": "random_forest",
+  "primary_metric": "r2",
+  "val_default": {},
+  "test_default": {
+    "mae": 0.42379519738139976,
+    "r2": 0.8578268237468643
+  },
+  "best_params": {
+    "model__max_depth": 12,
+    "model__n_estimators": 300
+  }
+}

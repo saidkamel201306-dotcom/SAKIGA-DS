@@ -1,0 +1,93 @@
+{
+  "name": "SAKIGA \u2014 Trigger Airflow DAG (bonus)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "sakiga/trigger-train",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "3313d535-0b14-4333-989c-2851952dcfd2",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        260,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8080/api/v1/dags/sakiga_ds_pipeline/dagRuns",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParametersJson": "{\"conf\": {\"source\": \"n8n\"}}",
+        "authentication": "none"
+      },
+      "id": "93061ecb-dafb-409f-ac6d-cfa77754b2fc",
+      "name": "Trigger Airflow",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        520,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ {\"ok\": true, \"message\": \"DAG d\u00e9clench\u00e9 (si auth OK).\", \"airflow\": $json } }}",
+        "options": {}
+      },
+      "id": "330def07-86e9-422b-80ed-c45713184c43",
+      "name": "Respond",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        780,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Trigger Airflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trigger Airflow": {
+      "main": [
+        [
+          {
+            "node": "Respond",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "versionId": "b9da5838-1e44-466d-8bd5-eecf4f4321f6",
+  "meta": {
+    "templateCredsSetup": true
+  },
+  "id": "sakiga_bonus_trigger_airflow"
+}

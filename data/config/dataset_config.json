@@ -1,0 +1,18 @@
+{
+  "raw_csv": "data/raw/styles.csv",
+  "sep": ";",
+  "target_col": "gender_group",
+  "feature_cols": [
+    "masterCategory",
+    "subCategory",
+    "articleType",
+    "baseColour",
+    "season",
+    "year",
+    "usage"
+  ],
+  "task": "classification",
+  "id_col": "id",
+  "text_col": "productDisplayName",
+  "drop_cols": []
+}

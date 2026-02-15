@@ -1,0 +1,10 @@
+column,missing,missing_ratio,dtype,n_unique
+id,0,0.0,int64,1021
+masterCategory,0,0.0,object,5
+subCategory,0,0.0,object,40
+articleType,0,0.0,object,133
+baseColour,0,0.0,object,39
+season,0,0.0,object,4
+year,0,0.0,int64,12
+usage,0,0.0,object,6
+gender_group,0,0.0,object,2

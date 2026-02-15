@@ -1,0 +1,19 @@
+{
+  "run_id": "run_20260214_224957",
+  "created_at": "2026-02-14T22:49:57",
+  "task": "classification",
+  "best_model": "random_forest",
+  "primary_metric": "f1_macro",
+  "val_default": {},
+  "test_default": {
+    "accuracy": 0.9853658536585366,
+    "f1_macro": 0.9841857594692587,
+    "roc_auc": 0.9981640146878824
+  },
+  "best_params": {
+    "model__max_depth": null,
+    "model__min_samples_split": 5,
+    "model__n_estimators": 200
+  },
+  "roc_auc": 0.9981640146878824
+}

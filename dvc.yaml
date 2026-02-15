@@ -1,0 +1,31 @@
+stages:
+  prepare_data:
+    cmd: python -m src.pipeline.prepare_data
+    deps:
+      - data/raw/user_dataset.csv
+      - data/config/dataset_config.json
+      - src/pipeline/prepare_data.py
+    outs:
+      - data/processed/dataset.csv
+
+  train_model:
+    cmd: python -m src.pipeline.train
+    deps:
+      - data/processed/dataset.csv
+      - data/config/dataset_config.json
+      - src/pipeline/train.py
+    outs:
+      - models/best_model.pkl
+      - data/processed/splits
+      - reports/train_meta.json
+
+  evaluate:
+    cmd: python -m src.pipeline.evaluate
+    deps:
+      - models/best_model.pkl
+      - data/processed/splits
+      - reports/train_meta.json
+      - src/pipeline/evaluate.py
+    outs:
+      - reports/metrics.json
+      - reports/plots

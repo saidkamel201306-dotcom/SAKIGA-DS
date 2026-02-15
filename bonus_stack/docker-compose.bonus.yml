@@ -1,0 +1,56 @@
+services:
+  airflow:
+    image: apache/airflow:2.8.4-python3.11
+    container_name: sakiga_airflow
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "false"
+      AIRFLOW__CORE__EXECUTOR: "SequentialExecutor"
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: "sqlite:////opt/airflow/airflow.db"
+
+      # IMPORTANT: forcer le webserver à écouter sur toutes les interfaces
+      AIRFLOW__WEBSERVER__WEB_SERVER_HOST: "0.0.0.0"
+      AIRFLOW__WEBSERVER__WEB_SERVER_PORT: "8080"
+
+      # (optionnel mais utile) API en basic auth pour n8n (admin/admin)
+      AIRFLOW__API__AUTH_BACKENDS: "airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session"
+
+      # (optionnel) éviter certains warnings
+      AIRFLOW__WEBSERVER__EXPOSE_CONFIG: "true"
+      AIRFLOW__WEBSERVER__SECRET_KEY: "sakiga_demo_secret_key"
+
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ../:/opt/project
+    ports:
+      - "8080:8080"
+
+    command:
+      - bash
+      - -lc
+      - |
+        set -e
+        rm -f /opt/airflow/airflow-webserver.pid /opt/airflow/airflow-scheduler.pid || true
+
+        # init DB + user admin/admin (idempotent)
+        airflow db migrate
+        airflow users create \
+          --username admin --password admin \
+          --firstname admin --lastname admin \
+          --role Admin --email admin@example.com || true
+
+        # lancer scheduler en arrière-plan, webserver au premier plan
+        airflow scheduler &
+        exec airflow webserver --host 0.0.0.0 --port 8080
+
+  n8n:
+    image: n8nio/n8n:1.63.4
+    container_name: sakiga_n8n
+    ports:
+      - "5678:5678"
+    environment:
+      N8N_DIAGNOSTICS_ENABLED: "false"
+      N8N_PERSONALIZATION_ENABLED: "false"
+    volumes:
+      - ./n8n:/home/node/.n8n

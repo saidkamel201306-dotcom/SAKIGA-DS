@@ -1,0 +1,90 @@
+{
+  "run_id": "run_20260215_170144",
+  "task": "regression",
+  "task_input": "classification",
+  "task_effective": "regression",
+  "task_note": "Auto-switch: Y ressemble à une variable continue → entraînement en régression.",
+  "split_warning": null,
+  "target_col": "failed_logins",
+  "x_cols": [
+    "duration",
+    "packets",
+    "bytes"
+  ],
+  "id_col": null,
+  "text_cols": [],
+  "feature_types": {
+    "num": [
+      "duration",
+      "packets",
+      "bytes"
+    ],
+    "cat": [],
+    "text": []
+  },
+  "selected_models": [
+    "random_forest",
+    "xgboost"
+  ],
+  "split": {
+    "train_rows": 384,
+    "val_rows": 96,
+    "test_rows": 120,
+    "test_size": 0.2,
+    "val_size_of_remaining": 0.2
+  },
+  "cv_folds_requested": 3,
+  "cv_folds_used": 3,
+  "cv_warning": null,
+  "n_jobs": -1,
+  "scoring": "r2",
+  "comparison": [
+    {
+      "model": "random_forest",
+      "cv_best_score": 0.9132895309218713,
+      "val_metrics": {
+        "mae": 0.36655373551103526,
+        "r2": 0.9557087325384057
+      },
+      "val_primary_metric": 0.9557087325384057,
+      "best_params": {
+        "model__max_depth": 12,
+        "model__n_estimators": 300
+      }
+    },
+    {
+      "model": "xgboost",
+      "cv_best_score": 0.8921015072025309,
+      "val_metrics": {
+        "mae": 0.4310496047182893,
+        "r2": 0.9322189877035806
+      },
+      "val_primary_metric": 0.9322189877035806,
+      "best_params": {
+        "model__learning_rate": 0.1,
+        "model__max_depth": 6,
+        "model__n_estimators": 300
+      }
+    }
+  ],
+  "best_model": "random_forest",
+  "best_val_primary_metric": 0.9557087325384057,
+  "best_test_metrics": {
+    "mae": 0.42379519738139976,
+    "r2": 0.8578268237468643
+  },
+  "best_test_primary_metric": 0.8578268237468643,
+  "justification": "Choix du meilleur modèle: comparaison sur le **jeu validation** (même X, même preprocessing). On retient celui qui maximise `r2` sur validation. Ensuite, on ré-entraine ce modèle sur (train+val) et on reporte les métriques finales sur test.",
+  "best_params": {
+    "model__max_depth": 12,
+    "model__n_estimators": 300
+  },
+  "artifacts": {
+    "run_dir": "runs\\run_20260215_170144",
+    "run_reports_dir": "runs\\run_20260215_170144\\reports",
+    "run_plots_dir": "runs\\run_20260215_170144\\reports\\plots",
+    "model_path": "models\\best_model.pkl",
+    "meta_path": "reports\\train_meta.json",
+    "splits_dir": "data\\processed\\splits"
+  }
+}

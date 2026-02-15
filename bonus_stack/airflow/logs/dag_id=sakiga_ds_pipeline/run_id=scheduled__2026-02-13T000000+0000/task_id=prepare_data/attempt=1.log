@@ -1,0 +1,366 @@
+[2026-02-14T00:33:37.514+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sakiga_ds_pipeline.prepare_data scheduled__2026-02-13T00:00:00+00:00 [queued]>
+[2026-02-14T00:33:37.522+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sakiga_ds_pipeline.prepare_data scheduled__2026-02-13T00:00:00+00:00 [queued]>
+[2026-02-14T00:33:37.523+0000] {taskinstance.py:2193} INFO - Starting attempt 1 of 1
+[2026-02-14T00:33:37.544+0000] {taskinstance.py:2217} INFO - Executing <Task(BashOperator): prepare_data> on 2026-02-13 00:00:00+00:00
+[2026-02-14T00:33:37.549+0000] {standard_task_runner.py:60} INFO - Started process 49 to run task
+[2026-02-14T00:33:37.584+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'sakiga_ds_pipeline', 'prepare_data', 'scheduled__2026-02-13T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/sakiga_ds_pipeline.py', '--cfg-path', '/tmp/tmpm_xckek6']
+[2026-02-14T00:33:37.587+0000] {standard_task_runner.py:88} INFO - Job 3: Subtask prepare_data
+[2026-02-14T00:33:38.652+0000] {task_command.py:423} INFO - Running <TaskInstance: sakiga_ds_pipeline.prepare_data scheduled__2026-02-13T00:00:00+00:00 [running]> on host f9c5e1b6d7e1
+[2026-02-14T00:33:38.717+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='sakiga' AIRFLOW_CTX_DAG_ID='sakiga_ds_pipeline' AIRFLOW_CTX_TASK_ID='prepare_data' AIRFLOW_CTX_EXECUTION_DATE='2026-02-13T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-02-13T00:00:00+00:00'
+[2026-02-14T00:33:38.720+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-02-14T00:33:38.721+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\nset -e\necho "📦 [SAKIGA] Prepare data"\npython3 -m venv "/opt/project/.airflow_venv" || true\n\nREQ_HASH=$(python3 - << \'PY\'\nimport hashlib, pathlib\np = pathlib.Path("/opt/project/requirements.txt")\nh = hashlib.sha256(p.read_bytes()).hexdigest() if p.exists() else "missing"\nprint(h)\nPY\n)\n\nif [ ! -f "/opt/project/.airflow_venv/.req_hash" ] || [ "$(cat /opt/project/.airflow_venv/.req_hash)" != "$REQ_HASH" ]; then\n  echo "🔧 Installing requirements into venv (first time / updated requirements)..."\n  "/opt/project/.airflow_venv/bin/pip" install --upgrade pip setuptools wheel >/dev/null\n  "/opt/project/.airflow_venv/bin/pip" install -r "/opt/project/requirements.txt"\n  echo "$REQ_HASH" > "/opt/project/.airflow_venv/.req_hash"\nelse\n  echo "✅ venv already ready"\nfi\n\n"/opt/project/.airflow_venv/bin/python" -m src.pipeline.prepare_data']
+[2026-02-14T00:33:38.732+0000] {subprocess.py:86} INFO - Output:
+[2026-02-14T00:33:38.738+0000] {subprocess.py:93} INFO - 📦 [SAKIGA] Prepare data
+[2026-02-14T00:35:39.199+0000] {subprocess.py:93} INFO - 🔧 Installing requirements into venv (first time / updated requirements)...
+[2026-02-14T00:37:52.181+0000] {subprocess.py:93} INFO - Collecting pandas==2.2.3 (from -r /opt/project/requirements.txt (line 1))
+[2026-02-14T00:37:52.472+0000] {subprocess.py:93} INFO -   Downloading pandas-2.2.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (89 kB)
+[2026-02-14T00:37:53.406+0000] {subprocess.py:93} INFO - Collecting numpy==2.1.1 (from -r /opt/project/requirements.txt (line 2))
+[2026-02-14T00:37:54.013+0000] {subprocess.py:93} INFO -   Downloading numpy-2.1.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (60 kB)
+[2026-02-14T00:37:54.613+0000] {subprocess.py:93} INFO - Collecting scikit-learn==1.5.2 (from -r /opt/project/requirements.txt (line 3))
+[2026-02-14T00:37:55.849+0000] {subprocess.py:93} INFO -   Downloading scikit_learn-1.5.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (13 kB)
+[2026-02-14T00:37:55.963+0000] {subprocess.py:93} INFO - Collecting joblib==1.4.2 (from -r /opt/project/requirements.txt (line 4))
+[2026-02-14T00:37:56.014+0000] {subprocess.py:93} INFO -   Downloading joblib-1.4.2-py3-none-any.whl.metadata (5.4 kB)
+[2026-02-14T00:37:56.128+0000] {subprocess.py:93} INFO - Collecting fastapi==0.115.0 (from -r /opt/project/requirements.txt (line 5))
+[2026-02-14T00:37:56.187+0000] {subprocess.py:93} INFO -   Downloading fastapi-0.115.0-py3-none-any.whl.metadata (27 kB)
+[2026-02-14T00:37:56.301+0000] {subprocess.py:93} INFO - Collecting uvicorn==0.30.6 (from -r /opt/project/requirements.txt (line 6))
+[2026-02-14T00:37:56.353+0000] {subprocess.py:93} INFO -   Downloading uvicorn-0.30.6-py3-none-any.whl.metadata (6.6 kB)
+[2026-02-14T00:37:56.639+0000] {subprocess.py:93} INFO - Collecting pydantic==2.8.2 (from -r /opt/project/requirements.txt (line 7))
+[2026-02-14T00:37:56.952+0000] {subprocess.py:93} INFO -   Downloading pydantic-2.8.2-py3-none-any.whl.metadata (125 kB)
+[2026-02-14T00:37:57.100+0000] {subprocess.py:93} INFO - Collecting pymysql==1.1.1 (from -r /opt/project/requirements.txt (line 8))
+[2026-02-14T00:37:57.153+0000] {subprocess.py:93} INFO -   Downloading PyMySQL-1.1.1-py3-none-any.whl.metadata (4.4 kB)
+[2026-02-14T00:37:57.556+0000] {subprocess.py:93} INFO - Collecting pyyaml==6.0.2 (from -r /opt/project/requirements.txt (line 9))
+[2026-02-14T00:37:57.611+0000] {subprocess.py:93} INFO -   Downloading PyYAML-6.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.1 kB)
+[2026-02-14T00:37:57.881+0000] {subprocess.py:93} INFO - Collecting matplotlib==3.9.2 (from -r /opt/project/requirements.txt (line 10))
+[2026-02-14T00:37:57.957+0000] {subprocess.py:93} INFO -   Downloading matplotlib-3.9.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (11 kB)
+[2026-02-14T00:37:58.273+0000] {subprocess.py:93} INFO - Collecting pillow==10.4.0 (from -r /opt/project/requirements.txt (line 11))
+[2026-02-14T00:37:58.325+0000] {subprocess.py:93} INFO -   Downloading pillow-10.4.0-cp311-cp311-manylinux_2_28_x86_64.whl.metadata (9.2 kB)
+[2026-02-14T00:37:58.472+0000] {subprocess.py:93} INFO - Collecting requests==2.32.3 (from -r /opt/project/requirements.txt (line 12))
+[2026-02-14T00:37:58.537+0000] {subprocess.py:93} INFO -   Downloading requests-2.32.3-py3-none-any.whl.metadata (4.6 kB)
+[2026-02-14T00:37:58.720+0000] {subprocess.py:93} INFO - Collecting streamlit==1.37.1 (from -r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:37:58.775+0000] {subprocess.py:93} INFO -   Downloading streamlit-1.37.1-py2.py3-none-any.whl.metadata (8.5 kB)
+[2026-02-14T00:37:59.802+0000] {subprocess.py:93} INFO - Collecting sqlalchemy==2.0.32 (from -r /opt/project/requirements.txt (line 14))
+[2026-02-14T00:37:59.856+0000] {subprocess.py:93} INFO -   Downloading SQLAlchemy-2.0.32-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.6 kB)
+[2026-02-14T00:38:03.454+0000] {subprocess.py:93} INFO - Collecting xgboost==2.1.1 (from -r /opt/project/requirements.txt (line 15))
+[2026-02-14T00:38:03.775+0000] {subprocess.py:93} INFO -   Downloading xgboost-2.1.1-py3-none-manylinux_2_28_x86_64.whl.metadata (2.1 kB)
+[2026-02-14T00:38:03.880+0000] {subprocess.py:93} INFO - Collecting python-dateutil>=2.8.2 (from pandas==2.2.3->-r /opt/project/requirements.txt (line 1))
+[2026-02-14T00:38:03.949+0000] {subprocess.py:93} INFO -   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+[2026-02-14T00:38:04.073+0000] {subprocess.py:93} INFO - Collecting pytz>=2020.1 (from pandas==2.2.3->-r /opt/project/requirements.txt (line 1))
+[2026-02-14T00:38:04.128+0000] {subprocess.py:93} INFO -   Downloading pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+[2026-02-14T00:38:04.223+0000] {subprocess.py:93} INFO - Collecting tzdata>=2022.7 (from pandas==2.2.3->-r /opt/project/requirements.txt (line 1))
+[2026-02-14T00:38:04.274+0000] {subprocess.py:93} INFO -   Downloading tzdata-2025.3-py2.py3-none-any.whl.metadata (1.4 kB)
+[2026-02-14T00:38:04.661+0000] {subprocess.py:93} INFO - Collecting scipy>=1.6.0 (from scikit-learn==1.5.2->-r /opt/project/requirements.txt (line 3))
+[2026-02-14T00:38:04.715+0000] {subprocess.py:93} INFO -   Downloading scipy-1.17.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+[2026-02-14T00:38:06.011+0000] {subprocess.py:93} INFO - Collecting threadpoolctl>=3.1.0 (from scikit-learn==1.5.2->-r /opt/project/requirements.txt (line 3))
+[2026-02-14T00:38:06.065+0000] {subprocess.py:93} INFO -   Downloading threadpoolctl-3.6.0-py3-none-any.whl.metadata (13 kB)
+[2026-02-14T00:38:06.172+0000] {subprocess.py:93} INFO - Collecting starlette<0.39.0,>=0.37.2 (from fastapi==0.115.0->-r /opt/project/requirements.txt (line 5))
+[2026-02-14T00:38:06.489+0000] {subprocess.py:93} INFO -   Downloading starlette-0.38.6-py3-none-any.whl.metadata (6.0 kB)
+[2026-02-14T00:38:06.852+0000] {subprocess.py:93} INFO - Collecting typing-extensions>=4.8.0 (from fastapi==0.115.0->-r /opt/project/requirements.txt (line 5))
+[2026-02-14T00:38:06.905+0000] {subprocess.py:93} INFO -   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+[2026-02-14T00:38:06.994+0000] {subprocess.py:93} INFO - Collecting annotated-types>=0.4.0 (from pydantic==2.8.2->-r /opt/project/requirements.txt (line 7))
+[2026-02-14T00:38:07.047+0000] {subprocess.py:93} INFO -   Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+[2026-02-14T00:38:08.144+0000] {subprocess.py:93} INFO - Collecting pydantic-core==2.20.1 (from pydantic==2.8.2->-r /opt/project/requirements.txt (line 7))
+[2026-02-14T00:38:08.197+0000] {subprocess.py:93} INFO -   Downloading pydantic_core-2.20.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+[2026-02-14T00:38:08.903+0000] {subprocess.py:93} INFO - Collecting click>=7.0 (from uvicorn==0.30.6->-r /opt/project/requirements.txt (line 6))
+[2026-02-14T00:38:09.211+0000] {subprocess.py:93} INFO -   Downloading click-8.3.1-py3-none-any.whl.metadata (2.6 kB)
+[2026-02-14T00:38:09.284+0000] {subprocess.py:93} INFO - Collecting h11>=0.8 (from uvicorn==0.30.6->-r /opt/project/requirements.txt (line 6))
+[2026-02-14T00:38:09.336+0000] {subprocess.py:93} INFO -   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+[2026-02-14T00:38:09.508+0000] {subprocess.py:93} INFO - Collecting contourpy>=1.0.1 (from matplotlib==3.9.2->-r /opt/project/requirements.txt (line 10))
+[2026-02-14T00:38:09.561+0000] {subprocess.py:93} INFO -   Downloading contourpy-1.3.3-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (5.5 kB)
+[2026-02-14T00:38:10.220+0000] {subprocess.py:93} INFO - Collecting cycler>=0.10 (from matplotlib==3.9.2->-r /opt/project/requirements.txt (line 10))
+[2026-02-14T00:38:10.848+0000] {subprocess.py:93} INFO -   Downloading cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+[2026-02-14T00:38:12.374+0000] {subprocess.py:93} INFO - Collecting fonttools>=4.22.0 (from matplotlib==3.9.2->-r /opt/project/requirements.txt (line 10))
+[2026-02-14T00:38:12.445+0000] {subprocess.py:93} INFO -   Downloading fonttools-4.61.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (114 kB)
+[2026-02-14T00:38:12.627+0000] {subprocess.py:93} INFO - Collecting kiwisolver>=1.3.1 (from matplotlib==3.9.2->-r /opt/project/requirements.txt (line 10))
+[2026-02-14T00:38:12.680+0000] {subprocess.py:93} INFO -   Downloading kiwisolver-1.4.9-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (6.3 kB)
+[2026-02-14T00:38:12.701+0000] {subprocess.py:93} INFO - Requirement already satisfied: packaging>=20.0 in ./.airflow_venv/lib/python3.11/site-packages (from matplotlib==3.9.2->-r /opt/project/requirements.txt (line 10)) (26.0)
+[2026-02-14T00:38:13.085+0000] {subprocess.py:93} INFO - Collecting pyparsing>=2.3.1 (from matplotlib==3.9.2->-r /opt/project/requirements.txt (line 10))
+[2026-02-14T00:38:13.140+0000] {subprocess.py:93} INFO -   Downloading pyparsing-3.3.2-py3-none-any.whl.metadata (5.8 kB)
+[2026-02-14T00:38:13.330+0000] {subprocess.py:93} INFO - Collecting charset-normalizer<4,>=2 (from requests==2.32.3->-r /opt/project/requirements.txt (line 12))
+[2026-02-14T00:38:13.384+0000] {subprocess.py:93} INFO -   Downloading charset_normalizer-3.4.4-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (37 kB)
+[2026-02-14T00:38:14.061+0000] {subprocess.py:93} INFO - Collecting idna<4,>=2.5 (from requests==2.32.3->-r /opt/project/requirements.txt (line 12))
+[2026-02-14T00:38:14.680+0000] {subprocess.py:93} INFO -   Downloading idna-3.11-py3-none-any.whl.metadata (8.4 kB)
+[2026-02-14T00:38:14.794+0000] {subprocess.py:93} INFO - Collecting urllib3<3,>=1.21.1 (from requests==2.32.3->-r /opt/project/requirements.txt (line 12))
+[2026-02-14T00:38:14.847+0000] {subprocess.py:93} INFO -   Downloading urllib3-2.6.3-py3-none-any.whl.metadata (6.9 kB)
+[2026-02-14T00:38:14.944+0000] {subprocess.py:93} INFO - Collecting certifi>=2017.4.17 (from requests==2.32.3->-r /opt/project/requirements.txt (line 12))
+[2026-02-14T00:38:15.000+0000] {subprocess.py:93} INFO -   Downloading certifi-2026.1.4-py3-none-any.whl.metadata (2.5 kB)
+[2026-02-14T00:38:15.100+0000] {subprocess.py:93} INFO - Collecting altair<6,>=4.0 (from streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:15.160+0000] {subprocess.py:93} INFO -   Downloading altair-5.5.0-py3-none-any.whl.metadata (11 kB)
+[2026-02-14T00:38:15.262+0000] {subprocess.py:93} INFO - Collecting blinker<2,>=1.0.0 (from streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:15.319+0000] {subprocess.py:93} INFO -   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+[2026-02-14T00:38:15.405+0000] {subprocess.py:93} INFO - Collecting cachetools<6,>=4.0 (from streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:15.479+0000] {subprocess.py:93} INFO -   Downloading cachetools-5.5.2-py3-none-any.whl.metadata (5.4 kB)
+[2026-02-14T00:38:15.587+0000] {subprocess.py:93} INFO - Collecting packaging>=20.0 (from matplotlib==3.9.2->-r /opt/project/requirements.txt (line 10))
+[2026-02-14T00:38:15.642+0000] {subprocess.py:93} INFO -   Downloading packaging-24.2-py3-none-any.whl.metadata (3.2 kB)
+[2026-02-14T00:38:15.917+0000] {subprocess.py:93} INFO - Collecting protobuf<6,>=3.20 (from streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:15.970+0000] {subprocess.py:93} INFO -   Downloading protobuf-5.29.6-cp38-abi3-manylinux2014_x86_64.whl.metadata (592 bytes)
+[2026-02-14T00:38:16.165+0000] {subprocess.py:93} INFO - Collecting pyarrow>=7.0 (from streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:16.784+0000] {subprocess.py:93} INFO -   Downloading pyarrow-23.0.0-cp311-cp311-manylinux_2_28_x86_64.whl.metadata (3.0 kB)
+[2026-02-14T00:38:16.902+0000] {subprocess.py:93} INFO - Collecting rich<14,>=10.14.0 (from streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:16.955+0000] {subprocess.py:93} INFO -   Downloading rich-13.9.4-py3-none-any.whl.metadata (18 kB)
+[2026-02-14T00:38:17.044+0000] {subprocess.py:93} INFO - Collecting tenacity<9,>=8.1.0 (from streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:17.364+0000] {subprocess.py:93} INFO -   Downloading tenacity-8.5.0-py3-none-any.whl.metadata (1.2 kB)
+[2026-02-14T00:38:17.459+0000] {subprocess.py:93} INFO - Collecting toml<2,>=0.10.1 (from streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:17.765+0000] {subprocess.py:93} INFO -   Downloading toml-0.10.2-py2.py3-none-any.whl.metadata (7.1 kB)
+[2026-02-14T00:38:17.909+0000] {subprocess.py:93} INFO - Collecting gitpython!=3.1.19,<4,>=3.0.7 (from streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:17.970+0000] {subprocess.py:93} INFO -   Downloading gitpython-3.1.46-py3-none-any.whl.metadata (13 kB)
+[2026-02-14T00:38:18.054+0000] {subprocess.py:93} INFO - Collecting pydeck<1,>=0.8.0b4 (from streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:18.107+0000] {subprocess.py:93} INFO -   Downloading pydeck-0.9.1-py2.py3-none-any.whl.metadata (4.1 kB)
+[2026-02-14T00:38:18.482+0000] {subprocess.py:93} INFO - Collecting tornado<7,>=6.0.3 (from streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:18.798+0000] {subprocess.py:93} INFO -   Downloading tornado-6.5.4-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.8 kB)
+[2026-02-14T00:38:19.038+0000] {subprocess.py:93} INFO - Collecting watchdog<5,>=2.1.5 (from streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:19.093+0000] {subprocess.py:93} INFO -   Downloading watchdog-4.0.2-py3-none-manylinux2014_x86_64.whl.metadata (38 kB)
+[2026-02-14T00:38:19.395+0000] {subprocess.py:93} INFO - Collecting greenlet!=0.4.17 (from sqlalchemy==2.0.32->-r /opt/project/requirements.txt (line 14))
+[2026-02-14T00:38:19.451+0000] {subprocess.py:93} INFO -   Downloading greenlet-3.3.1-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.7 kB)
+[2026-02-14T00:38:19.832+0000] {subprocess.py:93} INFO - Collecting nvidia-nccl-cu12 (from xgboost==2.1.1->-r /opt/project/requirements.txt (line 15))
+[2026-02-14T00:38:20.146+0000] {subprocess.py:93} INFO -   Downloading nvidia_nccl_cu12-2.29.3-py3-none-manylinux_2_18_x86_64.whl.metadata (2.1 kB)
+[2026-02-14T00:38:20.510+0000] {subprocess.py:93} INFO - Collecting jinja2 (from altair<6,>=4.0->streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:22.975+0000] {subprocess.py:93} INFO -   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+[2026-02-14T00:38:23.106+0000] {subprocess.py:93} INFO - Collecting jsonschema>=3.0 (from altair<6,>=4.0->streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:23.159+0000] {subprocess.py:93} INFO -   Downloading jsonschema-4.26.0-py3-none-any.whl.metadata (7.6 kB)
+[2026-02-14T00:38:23.268+0000] {subprocess.py:93} INFO - Collecting narwhals>=1.14.2 (from altair<6,>=4.0->streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:23.321+0000] {subprocess.py:93} INFO -   Downloading narwhals-2.16.0-py3-none-any.whl.metadata (14 kB)
+[2026-02-14T00:38:23.710+0000] {subprocess.py:93} INFO - Collecting gitdb<5,>=4.0.1 (from gitpython!=3.1.19,<4,>=3.0.7->streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:23.764+0000] {subprocess.py:93} INFO -   Downloading gitdb-4.0.12-py3-none-any.whl.metadata (1.2 kB)
+[2026-02-14T00:38:23.848+0000] {subprocess.py:93} INFO - Collecting smmap<6,>=3.0.1 (from gitdb<5,>=4.0.1->gitpython!=3.1.19,<4,>=3.0.7->streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:24.280+0000] {subprocess.py:93} INFO -   Downloading smmap-5.0.2-py3-none-any.whl.metadata (4.3 kB)
+[2026-02-14T00:38:27.523+0000] {subprocess.py:93} INFO - Collecting markdown-it-py>=2.2.0 (from rich<14,>=10.14.0->streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:27.969+0000] {subprocess.py:93} INFO -   Downloading markdown_it_py-4.0.0-py3-none-any.whl.metadata (7.3 kB)
+[2026-02-14T00:38:29.342+0000] {subprocess.py:93} INFO - Collecting pygments<3.0.0,>=2.13.0 (from rich<14,>=10.14.0->streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:30.426+0000] {subprocess.py:93} INFO -   Downloading pygments-2.19.2-py3-none-any.whl.metadata (2.5 kB)
+[2026-02-14T00:38:30.608+0000] {subprocess.py:93} INFO - Collecting anyio<5,>=3.4.0 (from starlette<0.39.0,>=0.37.2->fastapi==0.115.0->-r /opt/project/requirements.txt (line 5))
+[2026-02-14T00:38:30.661+0000] {subprocess.py:93} INFO -   Downloading anyio-4.12.1-py3-none-any.whl.metadata (4.3 kB)
+[2026-02-14T00:38:32.409+0000] {subprocess.py:93} INFO - Collecting MarkupSafe>=2.0 (from jinja2->altair<6,>=4.0->streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:33.685+0000] {subprocess.py:93} INFO -   Downloading markupsafe-3.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+[2026-02-14T00:38:34.109+0000] {subprocess.py:93} INFO - Collecting attrs>=22.2.0 (from jsonschema>=3.0->altair<6,>=4.0->streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:34.161+0000] {subprocess.py:93} INFO -   Downloading attrs-25.4.0-py3-none-any.whl.metadata (10 kB)
+[2026-02-14T00:38:34.269+0000] {subprocess.py:93} INFO - Collecting jsonschema-specifications>=2023.03.6 (from jsonschema>=3.0->altair<6,>=4.0->streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:34.336+0000] {subprocess.py:93} INFO -   Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl.metadata (2.9 kB)
+[2026-02-14T00:38:34.489+0000] {subprocess.py:93} INFO - Collecting referencing>=0.28.4 (from jsonschema>=3.0->altair<6,>=4.0->streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:34.542+0000] {subprocess.py:93} INFO -   Downloading referencing-0.37.0-py3-none-any.whl.metadata (2.8 kB)
+[2026-02-14T00:38:47.277+0000] {subprocess.py:93} INFO - Collecting rpds-py>=0.25.0 (from jsonschema>=3.0->altair<6,>=4.0->streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:47.343+0000] {subprocess.py:93} INFO -   Downloading rpds_py-0.30.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.1 kB)
+[2026-02-14T00:38:47.485+0000] {subprocess.py:93} INFO - Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich<14,>=10.14.0->streamlit==1.37.1->-r /opt/project/requirements.txt (line 13))
+[2026-02-14T00:38:47.537+0000] {subprocess.py:93} INFO -   Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+[2026-02-14T00:38:47.641+0000] {subprocess.py:93} INFO - Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas==2.2.3->-r /opt/project/requirements.txt (line 1))
+[2026-02-14T00:38:47.692+0000] {subprocess.py:93} INFO -   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+[2026-02-14T00:38:47.819+0000] {subprocess.py:93} INFO - Downloading pandas-2.2.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.1 MB)
+[2026-02-14T00:39:36.586+0000] {subprocess.py:93} INFO -    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.1/13.1 MB 184.6 kB/s  0:00:48
+[2026-02-14T00:39:36.923+0000] {subprocess.py:93} INFO - Downloading numpy-2.1.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.3 MB)
+[2026-02-14T00:40:07.254+0000] {subprocess.py:93} INFO -    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.3/16.3 MB 517.0 kB/s  0:00:30
+[2026-02-14T00:40:07.685+0000] {subprocess.py:93} INFO - Downloading scikit_learn-1.5.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.3 MB)
+[2026-02-14T00:40:27.391+0000] {subprocess.py:93} INFO -    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.3/13.3 MB 665.1 kB/s  0:00:19
+[2026-02-14T00:40:27.451+0000] {subprocess.py:93} INFO - Downloading joblib-1.4.2-py3-none-any.whl (301 kB)
+[2026-02-14T00:40:29.414+0000] {subprocess.py:93} INFO - Downloading fastapi-0.115.0-py3-none-any.whl (94 kB)
+[2026-02-14T00:40:29.502+0000] {subprocess.py:93} INFO - Downloading pydantic-2.8.2-py3-none-any.whl (423 kB)
+[2026-02-14T00:40:29.626+0000] {subprocess.py:93} INFO - Downloading uvicorn-0.30.6-py3-none-any.whl (62 kB)
+[2026-02-14T00:40:29.815+0000] {subprocess.py:93} INFO - Downloading PyMySQL-1.1.1-py3-none-any.whl (44 kB)
+[2026-02-14T00:40:29.897+0000] {subprocess.py:93} INFO - Downloading PyYAML-6.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (762 kB)
+[2026-02-14T00:40:30.377+0000] {subprocess.py:93} INFO -    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 763.0/763.0 kB 1.1 MB/s  0:00:00
+[2026-02-14T00:40:30.429+0000] {subprocess.py:93} INFO - Downloading matplotlib-3.9.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (8.3 MB)
+[2026-02-14T00:40:40.633+0000] {subprocess.py:93} INFO -    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.3/8.3 MB 795.9 kB/s  0:00:10
+[2026-02-14T00:40:42.928+0000] {subprocess.py:93} INFO - Downloading pillow-10.4.0-cp311-cp311-manylinux_2_28_x86_64.whl (4.5 MB)
+[2026-02-14T00:40:47.203+0000] {subprocess.py:93} INFO -    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 1.0 MB/s  0:00:04
+[2026-02-14T00:40:47.261+0000] {subprocess.py:93} INFO - Downloading requests-2.32.3-py3-none-any.whl (64 kB)
+[2026-02-14T00:40:47.351+0000] {subprocess.py:93} INFO - Downloading streamlit-1.37.1-py2.py3-none-any.whl (8.7 MB)
+[2026-02-14T00:40:56.544+0000] {subprocess.py:93} INFO -    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.7/8.7 MB 915.4 kB/s  0:00:09
+[2026-02-14T00:40:57.079+0000] {subprocess.py:93} INFO - Downloading SQLAlchemy-2.0.32-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.2 MB)
+[2026-02-14T00:41:00.287+0000] {subprocess.py:93} INFO -    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.2/3.2 MB 929.6 kB/s  0:00:03
+[2026-02-14T00:41:00.340+0000] {subprocess.py:93} INFO - Downloading xgboost-2.1.1-py3-none-manylinux_2_28_x86_64.whl (153.9 MB)
+[2026-02-14T00:46:06.718+0000] {subprocess.py:93} INFO -    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 153.9/153.9 MB ?  0:05:06
+[2026-02-14T00:46:06.787+0000] {subprocess.py:93} INFO - Downloading pydantic_core-2.20.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+[2026-02-14T00:46:07.083+0000] {subprocess.py:93} INFO -    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 6.6 MB/s  0:00:00
+[2026-02-14T00:46:07.145+0000] {subprocess.py:93} INFO - Downloading altair-5.5.0-py3-none-any.whl (731 kB)
+[2026-02-14T00:46:07.243+0000] {subprocess.py:93} INFO -    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 731.2/731.2 kB 6.6 MB/s  0:00:00
+[2026-02-14T00:46:07.299+0000] {subprocess.py:93} INFO - Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+[2026-02-14T00:46:08.044+0000] {subprocess.py:93} INFO - Downloading cachetools-5.5.2-py3-none-any.whl (10 kB)
+[2026-02-14T00:46:08.156+0000] {subprocess.py:93} INFO - Downloading charset_normalizer-3.4.4-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (151 kB)
+[2026-02-14T00:46:08.247+0000] {subprocess.py:93} INFO - Downloading click-8.3.1-py3-none-any.whl (108 kB)
+[2026-02-14T00:46:08.320+0000] {subprocess.py:93} INFO - Downloading gitpython-3.1.46-py3-none-any.whl (208 kB)
+[2026-02-14T00:46:08.428+0000] {subprocess.py:93} INFO - Downloading gitdb-4.0.12-py3-none-any.whl (62 kB)
+[2026-02-14T00:46:08.553+0000] {subprocess.py:93} INFO - Downloading idna-3.11-py3-none-any.whl (71 kB)
+[2026-02-14T00:46:08.631+0000] {subprocess.py:93} INFO - Downloading packaging-24.2-py3-none-any.whl (65 kB)
+[2026-02-14T00:46:08.995+0000] {subprocess.py:93} INFO - Downloading protobuf-5.29.6-cp38-abi3-manylinux2014_x86_64.whl (320 kB)
+[2026-02-14T00:46:09.492+0000] {subprocess.py:93} INFO - Downloading pydeck-0.9.1-py2.py3-none-any.whl (6.9 MB)
+[2026-02-14T00:46:10.536+0000] {subprocess.py:93} INFO -    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 6.6 MB/s  0:00:01
+[2026-02-14T00:46:10.991+0000] {subprocess.py:93} INFO - Downloading rich-13.9.4-py3-none-any.whl (242 kB)
+[2026-02-14T00:46:11.091+0000] {subprocess.py:93} INFO - Downloading pygments-2.19.2-py3-none-any.whl (1.2 MB)
+[2026-02-14T00:46:11.292+0000] {subprocess.py:93} INFO -    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 6.0 MB/s  0:00:00
+[2026-02-14T00:46:11.743+0000] {subprocess.py:93} INFO - Downloading smmap-5.0.2-py3-none-any.whl (24 kB)
+[2026-02-14T00:46:11.830+0000] {subprocess.py:93} INFO - Downloading starlette-0.38.6-py3-none-any.whl (71 kB)
+[2026-02-14T00:46:11.898+0000] {subprocess.py:93} INFO - Downloading anyio-4.12.1-py3-none-any.whl (113 kB)
+[2026-02-14T00:46:11.985+0000] {subprocess.py:93} INFO - Downloading tenacity-8.5.0-py3-none-any.whl (28 kB)
+[2026-02-14T00:46:12.442+0000] {subprocess.py:93} INFO - Downloading toml-0.10.2-py2.py3-none-any.whl (16 kB)
+[2026-02-14T00:46:12.534+0000] {subprocess.py:93} INFO - Downloading tornado-6.5.4-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (445 kB)
+[2026-02-14T00:46:13.040+0000] {subprocess.py:93} INFO - Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+[2026-02-14T00:46:13.103+0000] {subprocess.py:93} INFO - Downloading urllib3-2.6.3-py3-none-any.whl (131 kB)
+[2026-02-14T00:46:13.183+0000] {subprocess.py:93} INFO - Downloading watchdog-4.0.2-py3-none-manylinux2014_x86_64.whl (82 kB)
+[2026-02-14T00:46:13.250+0000] {subprocess.py:93} INFO - Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+[2026-02-14T00:46:13.310+0000] {subprocess.py:93} INFO - Downloading certifi-2026.1.4-py3-none-any.whl (152 kB)
+[2026-02-14T00:46:13.428+0000] {subprocess.py:93} INFO - Downloading contourpy-1.3.3-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (355 kB)
+[2026-02-14T00:46:13.550+0000] {subprocess.py:93} INFO - Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
+[2026-02-14T00:46:13.626+0000] {subprocess.py:93} INFO - Downloading fonttools-4.61.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.0 MB)
+[2026-02-14T00:46:14.405+0000] {subprocess.py:93} INFO -    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.0/5.0 MB 6.4 MB/s  0:00:00
+[2026-02-14T00:46:14.455+0000] {subprocess.py:93} INFO - Downloading greenlet-3.3.1-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (590 kB)
+[2026-02-14T00:46:14.560+0000] {subprocess.py:93} INFO -    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 590.3/590.3 kB 5.4 MB/s  0:00:00
+[2026-02-14T00:46:14.609+0000] {subprocess.py:93} INFO - Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+[2026-02-14T00:46:14.685+0000] {subprocess.py:93} INFO - Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+[2026-02-14T00:46:14.770+0000] {subprocess.py:93} INFO - Downloading jsonschema-4.26.0-py3-none-any.whl (90 kB)
+[2026-02-14T00:46:14.878+0000] {subprocess.py:93} INFO - Downloading attrs-25.4.0-py3-none-any.whl (67 kB)
+[2026-02-14T00:46:15.339+0000] {subprocess.py:93} INFO - Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl (18 kB)
+[2026-02-14T00:46:15.838+0000] {subprocess.py:93} INFO - Downloading kiwisolver-1.4.9-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.4 MB)
+[2026-02-14T00:46:16.094+0000] {subprocess.py:93} INFO -    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 5.3 MB/s  0:00:00
+[2026-02-14T00:46:16.143+0000] {subprocess.py:93} INFO - Downloading markdown_it_py-4.0.0-py3-none-any.whl (87 kB)
+[2026-02-14T00:46:16.609+0000] {subprocess.py:93} INFO - Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+[2026-02-14T00:46:16.692+0000] {subprocess.py:93} INFO - Downloading markupsafe-3.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+[2026-02-14T00:46:16.756+0000] {subprocess.py:93} INFO - Downloading narwhals-2.16.0-py3-none-any.whl (443 kB)
+[2026-02-14T00:46:17.219+0000] {subprocess.py:93} INFO - Downloading pyarrow-23.0.0-cp311-cp311-manylinux_2_28_x86_64.whl (47.5 MB)
+[2026-02-14T00:46:48.410+0000] {subprocess.py:93} INFO -    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 47.5/47.5 MB 1.3 MB/s  0:00:31
+[2026-02-14T00:46:48.462+0000] {subprocess.py:93} INFO - Downloading pyparsing-3.3.2-py3-none-any.whl (122 kB)
+[2026-02-14T00:46:48.567+0000] {subprocess.py:93} INFO - Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+[2026-02-14T00:46:48.656+0000] {subprocess.py:93} INFO - Downloading pytz-2025.2-py2.py3-none-any.whl (509 kB)
+[2026-02-14T00:46:48.796+0000] {subprocess.py:93} INFO - Downloading referencing-0.37.0-py3-none-any.whl (26 kB)
+[2026-02-14T00:46:48.861+0000] {subprocess.py:93} INFO - Downloading rpds_py-0.30.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (390 kB)
+[2026-02-14T00:46:48.989+0000] {subprocess.py:93} INFO - Downloading scipy-1.17.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (35.1 MB)
+[2026-02-14T00:48:05.388+0000] {subprocess.py:93} INFO -    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.1/35.1 MB ?  0:01:16
+[2026-02-14T00:48:05.442+0000] {subprocess.py:93} INFO - Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+[2026-02-14T00:48:05.528+0000] {subprocess.py:93} INFO - Downloading threadpoolctl-3.6.0-py3-none-any.whl (18 kB)
+[2026-02-14T00:48:05.603+0000] {subprocess.py:93} INFO - Downloading tzdata-2025.3-py2.py3-none-any.whl (348 kB)
+[2026-02-14T00:48:05.767+0000] {subprocess.py:93} INFO - Downloading nvidia_nccl_cu12-2.29.3-py3-none-manylinux_2_18_x86_64.whl (289.8 MB)
+[2026-02-14T00:54:14.102+0000] {subprocess.py:93} INFO -    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 289.8/289.8 MB ?  0:06:08
+[2026-02-14T00:54:40.556+0000] {subprocess.py:93} INFO - Installing collected packages: pytz, watchdog, urllib3, tzdata, typing-extensions, tornado, toml, threadpoolctl, tenacity, smmap, six, rpds-py, pyyaml, pyparsing, pymysql, pygments, pyarrow, protobuf, pillow, packaging, nvidia-nccl-cu12, numpy, narwhals, mdurl, MarkupSafe, kiwisolver, joblib, idna, h11, greenlet, fonttools, cycler, click, charset-normalizer, certifi, cachetools, blinker, attrs, annotated-types, uvicorn, sqlalchemy, scipy, requests, referencing, python-dateutil, pydantic-core, markdown-it-py, jinja2, gitdb, contourpy, anyio, xgboost, starlette, scikit-learn, rich, pydeck, pydantic, pandas, matplotlib, jsonschema-specifications, gitpython, jsonschema, fastapi, altair, streamlit
+[2026-02-14T00:56:48.118+0000] {subprocess.py:93} INFO -   Attempting uninstall: packaging
+[2026-02-14T00:56:48.189+0000] {subprocess.py:93} INFO -     Found existing installation: packaging 26.0
+[2026-02-14T00:56:49.084+0000] {subprocess.py:93} INFO -     Uninstalling packaging-26.0:
+[2026-02-14T00:56:49.202+0000] {subprocess.py:93} INFO -       Successfully uninstalled packaging-26.0
+[2026-02-14T01:07:16.738+0000] {subprocess.py:93} INFO - 
+[2026-02-14T01:07:16.762+0000] {subprocess.py:93} INFO - Successfully installed MarkupSafe-3.0.3 altair-5.5.0 annotated-types-0.7.0 anyio-4.12.1 attrs-25.4.0 blinker-1.9.0 cachetools-5.5.2 certifi-2026.1.4 charset-normalizer-3.4.4 click-8.3.1 contourpy-1.3.3 cycler-0.12.1 fastapi-0.115.0 fonttools-4.61.1 gitdb-4.0.12 gitpython-3.1.46 greenlet-3.3.1 h11-0.16.0 idna-3.11 jinja2-3.1.6 joblib-1.4.2 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 kiwisolver-1.4.9 markdown-it-py-4.0.0 matplotlib-3.9.2 mdurl-0.1.2 narwhals-2.16.0 numpy-2.1.1 nvidia-nccl-cu12-2.29.3 packaging-24.2 pandas-2.2.3 pillow-10.4.0 protobuf-5.29.6 pyarrow-23.0.0 pydantic-2.8.2 pydantic-core-2.20.1 pydeck-0.9.1 pygments-2.19.2 pymysql-1.1.1 pyparsing-3.3.2 python-dateutil-2.9.0.post0 pytz-2025.2 pyyaml-6.0.2 referencing-0.37.0 requests-2.32.3 rich-13.9.4 rpds-py-0.30.0 scikit-learn-1.5.2 scipy-1.17.0 six-1.17.0 smmap-5.0.2 sqlalchemy-2.0.32 starlette-0.38.6 streamlit-1.37.1 tenacity-8.5.0 threadpoolctl-3.6.0 toml-0.10.2 tornado-6.5.4 typing-extensions-4.15.0 tzdata-2025.3 urllib3-2.6.3 uvicorn-0.30.6 watchdog-4.0.2 xgboost-2.1.1
+[2026-02-14T01:07:33.482+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-02-14T01:07:33.482+0000] {subprocess.py:93} INFO -   File "<frozen runpy>", line 198, in _run_module_as_main
+[2026-02-14T01:07:33.483+0000] {subprocess.py:93} INFO -   File "<frozen runpy>", line 88, in _run_code
+[2026-02-14T01:07:33.483+0000] {subprocess.py:93} INFO -   File "/opt/project/src/pipeline/prepare_data.py", line 314, in <module>
+[2026-02-14T01:07:33.501+0000] {subprocess.py:93} INFO -     main()
+[2026-02-14T01:07:33.523+0000] {subprocess.py:93} INFO -   File "/opt/project/src/pipeline/prepare_data.py", line 105, in main
+[2026-02-14T01:07:33.529+0000] {subprocess.py:93} INFO -     raise FileNotFoundError(f"CSV not found: {raw_path}")
+[2026-02-14T01:07:33.530+0000] {subprocess.py:93} INFO - FileNotFoundError: CSV not found: data\raw\Titanic_train.csv
+[2026-02-14T01:07:34.070+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2026-02-14T01:07:57.491+0000] {taskinstance.py:2731} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 444, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 414, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2026-02-14T01:08:01.799+0000] {taskinstance.py:1149} INFO - Marking task as FAILED. dag_id=sakiga_ds_pipeline, task_id=prepare_data, execution_date=20260213T000000, start_date=20260214T003337, end_date=20260214T010800
+[2026-02-14T01:08:11.361+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 3 for task prepare_data (Bash command failed. The command returned a non-zero exit code 1.; 49)
+[2026-02-14T01:08:12.544+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-02-14T01:08:18.641+0000] {taskinstance.py:3312} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-02-14T09:14:29.352+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sakiga_ds_pipeline.prepare_data scheduled__2026-02-13T00:00:00+00:00 [queued]>
+[2026-02-14T09:14:29.550+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sakiga_ds_pipeline.prepare_data scheduled__2026-02-13T00:00:00+00:00 [queued]>
+[2026-02-14T09:14:29.552+0000] {taskinstance.py:2193} INFO - Starting attempt 1 of 1
+[2026-02-14T09:14:29.626+0000] {taskinstance.py:2217} INFO - Executing <Task(BashOperator): prepare_data> on 2026-02-13 00:00:00+00:00
+[2026-02-14T09:14:29.635+0000] {standard_task_runner.py:60} INFO - Started process 50 to run task
+[2026-02-14T09:14:29.642+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'sakiga_ds_pipeline', 'prepare_data', 'scheduled__2026-02-13T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/sakiga_ds_pipeline.py', '--cfg-path', '/tmp/tmpiaza7xfs']
+[2026-02-14T09:14:29.648+0000] {standard_task_runner.py:88} INFO - Job 3: Subtask prepare_data
+[2026-02-14T09:14:29.971+0000] {task_command.py:423} INFO - Running <TaskInstance: sakiga_ds_pipeline.prepare_data scheduled__2026-02-13T00:00:00+00:00 [running]> on host a5d8fb06a2c6
+[2026-02-14T09:14:30.341+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='sakiga' AIRFLOW_CTX_DAG_ID='sakiga_ds_pipeline' AIRFLOW_CTX_TASK_ID='prepare_data' AIRFLOW_CTX_EXECUTION_DATE='2026-02-13T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-02-13T00:00:00+00:00'
+[2026-02-14T09:14:30.524+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-02-14T09:14:30.525+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\nset -e\necho "📦 [SAKIGA] Prepare data"\npython3 -m venv "/opt/project/.airflow_venv" || true\n\nREQ_HASH=$(python3 - << \'PY\'\nimport hashlib, pathlib\np = pathlib.Path("/opt/project/requirements.txt")\nh = hashlib.sha256(p.read_bytes()).hexdigest() if p.exists() else "missing"\nprint(h)\nPY\n)\n\nif [ ! -f "/opt/project/.airflow_venv/.req_hash" ] || [ "$(cat /opt/project/.airflow_venv/.req_hash)" != "$REQ_HASH" ]; then\n  echo "🔧 Installing requirements into venv (first time / updated requirements)..."\n  "/opt/project/.airflow_venv/bin/pip" install --upgrade pip setuptools wheel >/dev/null\n  "/opt/project/.airflow_venv/bin/pip" install -r "/opt/project/requirements.txt"\n  echo "$REQ_HASH" > "/opt/project/.airflow_venv/.req_hash"\nelse\n  echo "✅ venv already ready"\nfi\n\n"/opt/project/.airflow_venv/bin/python" -m src.pipeline.prepare_data']
+[2026-02-14T09:14:30.543+0000] {subprocess.py:86} INFO - Output:
+[2026-02-14T09:14:30.545+0000] {subprocess.py:93} INFO - 📦 [SAKIGA] Prepare data
+[2026-02-14T09:15:30.916+0000] {subprocess.py:93} INFO - ✅ venv already ready
+[2026-02-14T09:16:17.286+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-02-14T09:16:17.287+0000] {subprocess.py:93} INFO -   File "<frozen runpy>", line 198, in _run_module_as_main
+[2026-02-14T09:16:17.288+0000] {subprocess.py:93} INFO -   File "<frozen runpy>", line 88, in _run_code
+[2026-02-14T09:16:17.288+0000] {subprocess.py:93} INFO -   File "/opt/project/src/pipeline/prepare_data.py", line 314, in <module>
+[2026-02-14T09:16:18.087+0000] {subprocess.py:93} INFO -     main()
+[2026-02-14T09:16:18.089+0000] {subprocess.py:93} INFO -   File "/opt/project/src/pipeline/prepare_data.py", line 105, in main
+[2026-02-14T09:16:18.097+0000] {subprocess.py:93} INFO -     raise FileNotFoundError(f"CSV not found: {raw_path}")
+[2026-02-14T09:16:18.098+0000] {subprocess.py:93} INFO - FileNotFoundError: CSV not found: data\raw\Titanic_train.csv
+[2026-02-14T09:16:18.273+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2026-02-14T09:16:18.366+0000] {taskinstance.py:2731} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 444, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 414, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2026-02-14T09:16:18.383+0000] {taskinstance.py:1149} INFO - Marking task as FAILED. dag_id=sakiga_ds_pipeline, task_id=prepare_data, execution_date=20260213T000000, start_date=20260214T091429, end_date=20260214T091618
+[2026-02-14T09:16:18.457+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 3 for task prepare_data (Bash command failed. The command returned a non-zero exit code 1.; 50)
+[2026-02-14T09:16:18.492+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-02-14T09:16:18.547+0000] {taskinstance.py:3312} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-02-14T09:20:16.647+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sakiga_ds_pipeline.prepare_data scheduled__2026-02-13T00:00:00+00:00 [queued]>
+[2026-02-14T09:20:16.692+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sakiga_ds_pipeline.prepare_data scheduled__2026-02-13T00:00:00+00:00 [queued]>
+[2026-02-14T09:20:16.710+0000] {taskinstance.py:2193} INFO - Starting attempt 1 of 1
+[2026-02-14T09:20:17.609+0000] {taskinstance.py:2217} INFO - Executing <Task(BashOperator): prepare_data> on 2026-02-13 00:00:00+00:00
+[2026-02-14T09:20:17.773+0000] {standard_task_runner.py:60} INFO - Started process 50 to run task
+[2026-02-14T09:20:17.789+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'sakiga_ds_pipeline', 'prepare_data', 'scheduled__2026-02-13T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/sakiga_ds_pipeline.py', '--cfg-path', '/tmp/tmpulz30v17']
+[2026-02-14T09:20:17.856+0000] {standard_task_runner.py:88} INFO - Job 3: Subtask prepare_data
+[2026-02-14T09:20:19.544+0000] {local_task_job_runner.py:121} ERROR - Received SIGTERM. Terminating subprocesses
+[2026-02-14T09:20:19.562+0000] {process_utils.py:131} INFO - Sending 15 to group 50. PIDs of all processes in the group: [50]
+[2026-02-14T09:20:19.628+0000] {process_utils.py:86} INFO - Sending the signal 15 to group 50
+[2026-02-14T09:21:54.830+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sakiga_ds_pipeline.prepare_data scheduled__2026-02-13T00:00:00+00:00 [queued]>
+[2026-02-14T09:21:54.839+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sakiga_ds_pipeline.prepare_data scheduled__2026-02-13T00:00:00+00:00 [queued]>
+[2026-02-14T09:21:54.840+0000] {taskinstance.py:2193} INFO - Starting attempt 1 of 1
+[2026-02-14T09:21:54.873+0000] {taskinstance.py:2217} INFO - Executing <Task(BashOperator): prepare_data> on 2026-02-13 00:00:00+00:00
+[2026-02-14T09:21:54.879+0000] {standard_task_runner.py:60} INFO - Started process 39 to run task
+[2026-02-14T09:21:54.888+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'sakiga_ds_pipeline', 'prepare_data', 'scheduled__2026-02-13T00:00:00+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/sakiga_ds_pipeline.py', '--cfg-path', '/tmp/tmp_5qk6nfa']
+[2026-02-14T09:21:54.891+0000] {standard_task_runner.py:88} INFO - Job 2: Subtask prepare_data
+[2026-02-14T09:21:55.386+0000] {task_command.py:423} INFO - Running <TaskInstance: sakiga_ds_pipeline.prepare_data scheduled__2026-02-13T00:00:00+00:00 [running]> on host a6ca3feeab34
+[2026-02-14T09:21:55.562+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='sakiga' AIRFLOW_CTX_DAG_ID='sakiga_ds_pipeline' AIRFLOW_CTX_TASK_ID='prepare_data' AIRFLOW_CTX_EXECUTION_DATE='2026-02-13T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-02-13T00:00:00+00:00'
+[2026-02-14T09:21:55.565+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-02-14T09:21:55.566+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\nset -e\necho "📦 [SAKIGA] Prepare data"\npython3 -m venv "/opt/project/.airflow_venv" || true\n\nREQ_HASH=$(python3 - << \'PY\'\nimport hashlib, pathlib\np = pathlib.Path("/opt/project/requirements.txt")\nh = hashlib.sha256(p.read_bytes()).hexdigest() if p.exists() else "missing"\nprint(h)\nPY\n)\n\nif [ ! -f "/opt/project/.airflow_venv/.req_hash" ] || [ "$(cat /opt/project/.airflow_venv/.req_hash)" != "$REQ_HASH" ]; then\n  echo "🔧 Installing requirements into venv (first time / updated requirements)..."\n  "/opt/project/.airflow_venv/bin/pip" install --upgrade pip setuptools wheel >/dev/null\n  "/opt/project/.airflow_venv/bin/pip" install -r "/opt/project/requirements.txt"\n  echo "$REQ_HASH" > "/opt/project/.airflow_venv/.req_hash"\nelse\n  echo "✅ venv already ready"\nfi\n\n"/opt/project/.airflow_venv/bin/python" -m src.pipeline.prepare_data']
+[2026-02-14T09:21:55.587+0000] {subprocess.py:86} INFO - Output:
+[2026-02-14T09:21:55.590+0000] {subprocess.py:93} INFO - 📦 [SAKIGA] Prepare data
+[2026-02-14T09:22:24.309+0000] {subprocess.py:93} INFO - ✅ venv already ready
+[2026-02-14T09:22:44.327+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-02-14T09:22:44.327+0000] {subprocess.py:93} INFO -   File "<frozen runpy>", line 198, in _run_module_as_main
+[2026-02-14T09:22:44.328+0000] {subprocess.py:93} INFO -   File "<frozen runpy>", line 88, in _run_code
+[2026-02-14T09:22:44.328+0000] {subprocess.py:93} INFO -   File "/opt/project/src/pipeline/prepare_data.py", line 314, in <module>
+[2026-02-14T09:22:44.332+0000] {subprocess.py:93} INFO -     main()
+[2026-02-14T09:22:44.333+0000] {subprocess.py:93} INFO -   File "/opt/project/src/pipeline/prepare_data.py", line 105, in main
+[2026-02-14T09:22:44.335+0000] {subprocess.py:93} INFO -     raise FileNotFoundError(f"CSV not found: {raw_path}")
+[2026-02-14T09:22:44.335+0000] {subprocess.py:93} INFO - FileNotFoundError: CSV not found: data\raw\Titanic_train.csv
+[2026-02-14T09:22:44.611+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2026-02-14T09:22:44.621+0000] {taskinstance.py:2731} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 444, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 414, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2026-02-14T09:22:44.627+0000] {taskinstance.py:1149} INFO - Marking task as FAILED. dag_id=sakiga_ds_pipeline, task_id=prepare_data, execution_date=20260213T000000, start_date=20260214T092154, end_date=20260214T092244
+[2026-02-14T09:22:44.797+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 2 for task prepare_data (Bash command failed. The command returned a non-zero exit code 1.; 39)
+[2026-02-14T09:22:44.846+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-02-14T09:22:44.945+0000] {taskinstance.py:3312} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-02-14T22:49:48.469+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sakiga_ds_pipeline.prepare_data scheduled__2026-02-13T00:00:00+00:00 [queued]>
+[2026-02-14T22:49:48.481+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sakiga_ds_pipeline.prepare_data scheduled__2026-02-13T00:00:00+00:00 [queued]>
+[2026-02-14T22:49:48.481+0000] {taskinstance.py:2193} INFO - Starting attempt 1 of 1
+[2026-02-14T22:49:48.521+0000] {taskinstance.py:2217} INFO - Executing <Task(BashOperator): prepare_data> on 2026-02-13 00:00:00+00:00
+[2026-02-14T22:49:48.543+0000] {standard_task_runner.py:60} INFO - Started process 45 to run task
+[2026-02-14T22:49:48.619+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'sakiga_ds_pipeline', 'prepare_data', 'scheduled__2026-02-13T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/sakiga_ds_pipeline.py', '--cfg-path', '/tmp/tmpffn5rha2']
+[2026-02-14T22:49:48.629+0000] {standard_task_runner.py:88} INFO - Job 3: Subtask prepare_data
+[2026-02-14T22:49:48.890+0000] {task_command.py:423} INFO - Running <TaskInstance: sakiga_ds_pipeline.prepare_data scheduled__2026-02-13T00:00:00+00:00 [running]> on host a6ca3feeab34
+[2026-02-14T22:49:49.452+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='sakiga' AIRFLOW_CTX_DAG_ID='sakiga_ds_pipeline' AIRFLOW_CTX_TASK_ID='prepare_data' AIRFLOW_CTX_EXECUTION_DATE='2026-02-13T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-02-13T00:00:00+00:00'
+[2026-02-14T22:49:49.805+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-02-14T22:49:49.806+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\nset -e\necho "📦 [SAKIGA] Prepare data"\npython3 -m venv "/opt/project/.airflow_venv" || true\n\nREQ_HASH=$(python3 - << \'PY\'\nimport hashlib, pathlib\np = pathlib.Path("/opt/project/requirements.txt")\nh = hashlib.sha256(p.read_bytes()).hexdigest() if p.exists() else "missing"\nprint(h)\nPY\n)\n\nif [ ! -f "/opt/project/.airflow_venv/.req_hash" ] || [ "$(cat /opt/project/.airflow_venv/.req_hash)" != "$REQ_HASH" ]; then\n  echo "🔧 Installing requirements into venv (first time / updated requirements)..."\n  "/opt/project/.airflow_venv/bin/pip" install --upgrade pip setuptools wheel >/dev/null\n  "/opt/project/.airflow_venv/bin/pip" install -r "/opt/project/requirements.txt"\n  echo "$REQ_HASH" > "/opt/project/.airflow_venv/.req_hash"\nelse\n  echo "✅ venv already ready"\nfi\n\n"/opt/project/.airflow_venv/bin/python" -m src.pipeline.prepare_data']
+[2026-02-14T22:49:49.847+0000] {subprocess.py:86} INFO - Output:
+[2026-02-14T22:49:49.850+0000] {subprocess.py:93} INFO - 📦 [SAKIGA] Prepare data
+[2026-02-14T22:51:38.591+0000] {subprocess.py:93} INFO - ✅ venv already ready
+[2026-02-14T22:53:46.350+0000] {subprocess.py:93} INFO - [OK] Saved: data/processed/dataset.csv | rows: 1021
+[2026-02-14T22:53:46.351+0000] {subprocess.py:93} INFO - [OK] EDA: reports/eda_summary.json + reports/eda_missing.csv + reports/eda_outliers.csv
+[2026-02-14T22:53:46.722+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-02-14T22:53:46.753+0000] {taskinstance.py:1149} INFO - Marking task as SUCCESS. dag_id=sakiga_ds_pipeline, task_id=prepare_data, execution_date=20260213T000000, start_date=20260214T224948, end_date=20260214T225346
+[2026-02-14T22:53:46.928+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-02-14T22:53:47.018+0000] {taskinstance.py:3312} INFO - 1 downstream tasks scheduled from follow-on schedule check

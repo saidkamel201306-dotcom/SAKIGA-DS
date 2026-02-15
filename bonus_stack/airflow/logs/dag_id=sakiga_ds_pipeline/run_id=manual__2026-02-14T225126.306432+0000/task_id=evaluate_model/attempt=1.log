@@ -1,0 +1,21 @@
+[2026-02-14T23:14:18.404+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sakiga_ds_pipeline.evaluate_model manual__2026-02-14T22:51:26.306432+00:00 [queued]>
+[2026-02-14T23:14:18.419+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sakiga_ds_pipeline.evaluate_model manual__2026-02-14T22:51:26.306432+00:00 [queued]>
+[2026-02-14T23:14:18.420+0000] {taskinstance.py:2193} INFO - Starting attempt 1 of 1
+[2026-02-14T23:14:18.445+0000] {taskinstance.py:2217} INFO - Executing <Task(BashOperator): evaluate_model> on 2026-02-14 22:51:26.306432+00:00
+[2026-02-14T23:14:18.464+0000] {standard_task_runner.py:60} INFO - Started process 249 to run task
+[2026-02-14T23:14:18.465+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'sakiga_ds_pipeline', 'evaluate_model', 'manual__2026-02-14T22:51:26.306432+00:00', '--job-id', '11', '--raw', '--subdir', 'DAGS_FOLDER/sakiga_ds_pipeline.py', '--cfg-path', '/tmp/tmptiv9iv12']
+[2026-02-14T23:14:18.471+0000] {standard_task_runner.py:88} INFO - Job 11: Subtask evaluate_model
+[2026-02-14T23:14:18.597+0000] {task_command.py:423} INFO - Running <TaskInstance: sakiga_ds_pipeline.evaluate_model manual__2026-02-14T22:51:26.306432+00:00 [running]> on host a6ca3feeab34
+[2026-02-14T23:14:18.794+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='sakiga' AIRFLOW_CTX_DAG_ID='sakiga_ds_pipeline' AIRFLOW_CTX_TASK_ID='evaluate_model' AIRFLOW_CTX_EXECUTION_DATE='2026-02-14T22:51:26.306432+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-02-14T22:51:26.306432+00:00'
+[2026-02-14T23:14:18.797+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-02-14T23:14:18.798+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\nset -e\necho "📊 [SAKIGA] Evaluate model"\n"/opt/project/.airflow_venv/bin/python" -m src.pipeline.evaluate']
+[2026-02-14T23:14:18.817+0000] {subprocess.py:86} INFO - Output:
+[2026-02-14T23:14:18.827+0000] {subprocess.py:93} INFO - 📊 [SAKIGA] Evaluate model
+[2026-02-14T23:14:35.968+0000] {subprocess.py:93} INFO - [OK] run_id = run_20260214_231433
+[2026-02-14T23:14:35.969+0000] {subprocess.py:93} INFO - [OK] latest metrics: reports/metrics.json
+[2026-02-14T23:14:35.970+0000] {subprocess.py:93} INFO - [OK] latest plots: reports/plots
+[2026-02-14T23:14:35.970+0000] {subprocess.py:93} INFO - [OK] run saved: runs/run_20260214_231433
+[2026-02-14T23:14:36.378+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-02-14T23:14:36.412+0000] {taskinstance.py:1149} INFO - Marking task as SUCCESS. dag_id=sakiga_ds_pipeline, task_id=evaluate_model, execution_date=20260214T225126, start_date=20260214T231418, end_date=20260214T231436
+[2026-02-14T23:14:36.470+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-02-14T23:14:36.488+0000] {taskinstance.py:3312} INFO - 1 downstream tasks scheduled from follow-on schedule check

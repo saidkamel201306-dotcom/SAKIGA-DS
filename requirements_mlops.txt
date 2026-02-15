@@ -1,0 +1,5 @@
+# Optional MLOps stack (install only if you want the full 'prof-like' experience)
+dvc==3.55.2
+mlflow==2.14.3
+evidently==0.4.33
+pathspec==0.12.1

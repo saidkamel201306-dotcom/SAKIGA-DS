@@ -1,0 +1,20 @@
+[2026-02-15T22:32:15.739+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sakiga_ds_pipeline.prepare_data manual__2026-02-15T22:32:09.641526+00:00 [queued]>
+[2026-02-15T22:32:15.747+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sakiga_ds_pipeline.prepare_data manual__2026-02-15T22:32:09.641526+00:00 [queued]>
+[2026-02-15T22:32:15.748+0000] {taskinstance.py:2193} INFO - Starting attempt 1 of 1
+[2026-02-15T22:32:15.770+0000] {taskinstance.py:2217} INFO - Executing <Task(BashOperator): prepare_data> on 2026-02-15 22:32:09.641526+00:00
+[2026-02-15T22:32:15.775+0000] {standard_task_runner.py:60} INFO - Started process 466 to run task
+[2026-02-15T22:32:15.781+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'sakiga_ds_pipeline', 'prepare_data', 'manual__2026-02-15T22:32:09.641526+00:00', '--job-id', '38', '--raw', '--subdir', 'DAGS_FOLDER/sakiga_ds_pipeline.py', '--cfg-path', '/tmp/tmppw5bfmcm']
+[2026-02-15T22:32:15.785+0000] {standard_task_runner.py:88} INFO - Job 38: Subtask prepare_data
+[2026-02-15T22:32:15.888+0000] {task_command.py:423} INFO - Running <TaskInstance: sakiga_ds_pipeline.prepare_data manual__2026-02-15T22:32:09.641526+00:00 [running]> on host a6ca3feeab34
+[2026-02-15T22:32:15.979+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='sakiga' AIRFLOW_CTX_DAG_ID='sakiga_ds_pipeline' AIRFLOW_CTX_TASK_ID='prepare_data' AIRFLOW_CTX_EXECUTION_DATE='2026-02-15T22:32:09.641526+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-02-15T22:32:09.641526+00:00'
+[2026-02-15T22:32:15.981+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-02-15T22:32:15.982+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\nset -e\necho "📦 [SAKIGA] Prepare data"\npython3 -m venv "/opt/project/.airflow_venv" || true\n\nREQ_HASH=$(python3 - << \'PY\'\nimport hashlib, pathlib\np = pathlib.Path("/opt/project/requirements.txt")\nh = hashlib.sha256(p.read_bytes()).hexdigest() if p.exists() else "missing"\nprint(h)\nPY\n)\n\nif [ ! -f "/opt/project/.airflow_venv/.req_hash" ] || [ "$(cat /opt/project/.airflow_venv/.req_hash)" != "$REQ_HASH" ]; then\n  echo "🔧 Installing requirements into venv (first time / updated requirements)..."\n  "/opt/project/.airflow_venv/bin/pip" install --upgrade pip setuptools wheel >/dev/null\n  "/opt/project/.airflow_venv/bin/pip" install -r "/opt/project/requirements.txt"\n  echo "$REQ_HASH" > "/opt/project/.airflow_venv/.req_hash"\nelse\n  echo "✅ venv already ready"\nfi\n\n"/opt/project/.airflow_venv/bin/python" -m src.pipeline.prepare_data']
+[2026-02-15T22:32:15.994+0000] {subprocess.py:86} INFO - Output:
+[2026-02-15T22:32:15.997+0000] {subprocess.py:93} INFO - 📦 [SAKIGA] Prepare data
+[2026-02-15T22:32:24.401+0000] {subprocess.py:93} INFO - ✅ venv already ready
+[2026-02-15T22:32:30.076+0000] {subprocess.py:93} INFO - [OK] Saved: data/processed/dataset.csv | rows: 1021
+[2026-02-15T22:32:30.076+0000] {subprocess.py:93} INFO - [OK] EDA: reports/eda_summary.json + reports/eda_missing.csv + reports/eda_outliers.csv
+[2026-02-15T22:32:30.256+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-02-15T22:32:30.284+0000] {taskinstance.py:1149} INFO - Marking task as SUCCESS. dag_id=sakiga_ds_pipeline, task_id=prepare_data, execution_date=20260215T223209, start_date=20260215T223215, end_date=20260215T223230
+[2026-02-15T22:32:30.314+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-02-15T22:32:30.333+0000] {taskinstance.py:3312} INFO - 1 downstream tasks scheduled from follow-on schedule check

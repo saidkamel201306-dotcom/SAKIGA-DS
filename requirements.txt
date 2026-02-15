@@ -1,0 +1,15 @@
+pandas==2.2.3
+numpy==2.1.1
+scikit-learn==1.5.2
+joblib==1.4.2
+fastapi==0.115.0
+uvicorn==0.30.6
+pydantic==2.8.2
+pymysql==1.1.1
+pyyaml==6.0.2
+matplotlib==3.9.2
+pillow==10.4.0
+requests==2.32.3
+streamlit==1.37.1
+sqlalchemy==2.0.32
+xgboost==2.1.1

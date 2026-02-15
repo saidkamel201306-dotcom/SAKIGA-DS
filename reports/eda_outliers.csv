@@ -1,0 +1,2 @@
+column,n,q1,q3,iqr,lower,upper,outliers,clipped,outlier_ratio
+year,1021,2012.0,2016.0,4.0,2006.0,2022.0,0,False,0.0

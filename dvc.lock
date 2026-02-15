@@ -1,0 +1,81 @@
+schema: '2.0'
+stages:
+  prepare_data:
+    cmd: python -m src.pipeline.prepare_data
+    deps:
+    - path: data/config/dataset_config.json
+      hash: md5
+      md5: a3572416031ae9914fff81c7467915f1
+      size: 343
+    - path: data/raw/user_dataset.csv
+      hash: md5
+      md5: ed5df7c538b62e352f506bff20280865
+      size: 238538
+    - path: src/pipeline/prepare_data.py
+      hash: md5
+      md5: 7466986b32910ed58f42f743837599eb
+      size: 11178
+    outs:
+    - path: data/processed/dataset.csv
+      hash: md5
+      md5: 42173b38bdc2f02b3bc957212176c721
+      size: 68626
+  train_model:
+    cmd: python -m src.pipeline.train
+    deps:
+    - path: data/config/dataset_config.json
+      hash: md5
+      md5: a3572416031ae9914fff81c7467915f1
+      size: 343
+    - path: data/processed/dataset.csv
+      hash: md5
+      md5: 42173b38bdc2f02b3bc957212176c721
+      size: 68626
+    - path: src/pipeline/train.py
+      hash: md5
+      md5: b1f25f3fe70802c1ad6d0113636e27b3
+      size: 27272
+    outs:
+    - path: data/processed/splits
+      hash: md5
+      md5: 815bea3d715bc7cc6b0a2eb804ad470d.dir
+      size: 60389
+      nfiles: 6
+    - path: models/best_model.pkl
+      hash: md5
+      md5: 9d574826a0edcf443aee00617d00078c
+      size: 82137
+    - path: reports/train_meta.json
+      hash: md5
+      md5: ac2f8d526ad0e985416ecb7ad66f637d
+      size: 3277
+  evaluate:
+    cmd: python -m src.pipeline.evaluate
+    deps:
+    - path: data/processed/splits
+      hash: md5
+      md5: 815bea3d715bc7cc6b0a2eb804ad470d.dir
+      size: 60389
+      nfiles: 6
+    - path: models/best_model.pkl
+      hash: md5
+      md5: 9d574826a0edcf443aee00617d00078c
+      size: 82137
+    - path: reports/train_meta.json
+      hash: md5
+      md5: ac2f8d526ad0e985416ecb7ad66f637d
+      size: 3277
+    - path: src/pipeline/evaluate.py
+      hash: md5
+      md5: 2f99a987b95f827568d0b68a5aafafa0
+      size: 11457
+    outs:
+    - path: reports/metrics.json
+      hash: md5
+      md5: cfc75619539478ed8cad675e556c842e
+      size: 481
+    - path: reports/plots
+      hash: md5
+      md5: a00a0bcbb1d984e2c87b17caa2408178.dir
+      size: 147016
+      nfiles: 4

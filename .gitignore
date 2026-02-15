@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environnements
+.venv/
+venv/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Outputs / gros fichiers (à adapter si tu veux en garder un exemple)
+mlruns/
+runs/
+data/raw/
+data/processed/
+models/
+reports/plots/
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/

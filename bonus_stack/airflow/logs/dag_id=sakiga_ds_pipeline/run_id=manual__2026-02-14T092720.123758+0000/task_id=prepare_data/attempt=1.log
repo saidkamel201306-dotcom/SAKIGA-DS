@@ -1,0 +1,38 @@
+[2026-02-14T09:29:05.091+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sakiga_ds_pipeline.prepare_data manual__2026-02-14T09:27:20.123758+00:00 [queued]>
+[2026-02-14T09:29:05.098+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sakiga_ds_pipeline.prepare_data manual__2026-02-14T09:27:20.123758+00:00 [queued]>
+[2026-02-14T09:29:05.099+0000] {taskinstance.py:2193} INFO - Starting attempt 1 of 1
+[2026-02-14T09:29:05.147+0000] {taskinstance.py:2217} INFO - Executing <Task(BashOperator): prepare_data> on 2026-02-14 09:27:20.123758+00:00
+[2026-02-14T09:29:05.318+0000] {standard_task_runner.py:60} INFO - Started process 93 to run task
+[2026-02-14T09:29:05.331+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'sakiga_ds_pipeline', 'prepare_data', 'manual__2026-02-14T09:27:20.123758+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/sakiga_ds_pipeline.py', '--cfg-path', '/tmp/tmpxple3fl7']
+[2026-02-14T09:29:05.336+0000] {standard_task_runner.py:88} INFO - Job 3: Subtask prepare_data
+[2026-02-14T09:29:05.969+0000] {task_command.py:423} INFO - Running <TaskInstance: sakiga_ds_pipeline.prepare_data manual__2026-02-14T09:27:20.123758+00:00 [running]> on host a6ca3feeab34
+[2026-02-14T09:29:06.274+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='sakiga' AIRFLOW_CTX_DAG_ID='sakiga_ds_pipeline' AIRFLOW_CTX_TASK_ID='prepare_data' AIRFLOW_CTX_EXECUTION_DATE='2026-02-14T09:27:20.123758+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-02-14T09:27:20.123758+00:00'
+[2026-02-14T09:29:06.276+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-02-14T09:29:06.277+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\nset -e\necho "📦 [SAKIGA] Prepare data"\npython3 -m venv "/opt/project/.airflow_venv" || true\n\nREQ_HASH=$(python3 - << \'PY\'\nimport hashlib, pathlib\np = pathlib.Path("/opt/project/requirements.txt")\nh = hashlib.sha256(p.read_bytes()).hexdigest() if p.exists() else "missing"\nprint(h)\nPY\n)\n\nif [ ! -f "/opt/project/.airflow_venv/.req_hash" ] || [ "$(cat /opt/project/.airflow_venv/.req_hash)" != "$REQ_HASH" ]; then\n  echo "🔧 Installing requirements into venv (first time / updated requirements)..."\n  "/opt/project/.airflow_venv/bin/pip" install --upgrade pip setuptools wheel >/dev/null\n  "/opt/project/.airflow_venv/bin/pip" install -r "/opt/project/requirements.txt"\n  echo "$REQ_HASH" > "/opt/project/.airflow_venv/.req_hash"\nelse\n  echo "✅ venv already ready"\nfi\n\n"/opt/project/.airflow_venv/bin/python" -m src.pipeline.prepare_data']
+[2026-02-14T09:29:07.467+0000] {subprocess.py:86} INFO - Output:
+[2026-02-14T09:29:08.009+0000] {subprocess.py:93} INFO - 📦 [SAKIGA] Prepare data
+[2026-02-14T09:29:25.147+0000] {subprocess.py:93} INFO - ✅ venv already ready
+[2026-02-14T09:29:37.375+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-02-14T09:29:37.375+0000] {subprocess.py:93} INFO -   File "<frozen runpy>", line 198, in _run_module_as_main
+[2026-02-14T09:29:37.376+0000] {subprocess.py:93} INFO -   File "<frozen runpy>", line 88, in _run_code
+[2026-02-14T09:29:37.376+0000] {subprocess.py:93} INFO -   File "/opt/project/src/pipeline/prepare_data.py", line 314, in <module>
+[2026-02-14T09:29:37.379+0000] {subprocess.py:93} INFO -     main()
+[2026-02-14T09:29:37.380+0000] {subprocess.py:93} INFO -   File "/opt/project/src/pipeline/prepare_data.py", line 105, in main
+[2026-02-14T09:29:37.382+0000] {subprocess.py:93} INFO -     raise FileNotFoundError(f"CSV not found: {raw_path}")
+[2026-02-14T09:29:37.384+0000] {subprocess.py:93} INFO - FileNotFoundError: CSV not found: data\raw\Titanic_train.csv
+[2026-02-14T09:29:37.574+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2026-02-14T09:29:37.587+0000] {taskinstance.py:2731} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 444, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 414, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2026-02-14T09:29:37.591+0000] {taskinstance.py:1149} INFO - Marking task as FAILED. dag_id=sakiga_ds_pipeline, task_id=prepare_data, execution_date=20260214T092720, start_date=20260214T092905, end_date=20260214T092937
+[2026-02-14T09:29:37.615+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 3 for task prepare_data (Bash command failed. The command returned a non-zero exit code 1.; 93)
+[2026-02-14T09:29:37.653+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-02-14T09:29:37.746+0000] {taskinstance.py:3312} INFO - 0 downstream tasks scheduled from follow-on schedule check
