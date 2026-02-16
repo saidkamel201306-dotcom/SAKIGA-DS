@@ -51,8 +51,8 @@ L’application est organisée en pages Streamlit :
 - **🗃️ Export & DB** : export livrables + DB (si configurée).
 - **🧾 Runs** : historique des exécutions et accès aux artefacts.
 - **🧩 Bonus MLOps** : cockpit DVC/MLflow/Evidently.
-- **🌀 Bonus Airflow** : orchestration DAG (si stack Airflow disponible).
-- **🤖 Bonus n8n** : automatisation via webhook (si stack n8n disponible).
+- **🌀 Bonus Airflow** : orchestration DAG (stack docker Airflow nécessaire).
+- **🤖 Bonus n8n** : automatisation via webhook (stack docker n8n nécessaire).
 
 ---
 
